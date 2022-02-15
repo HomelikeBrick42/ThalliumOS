@@ -3,6 +3,8 @@
 bits 16
 org 0x7c00
 
+cli
+
 mov [BootDisk], dl
 
 mov sp, 0x7c00

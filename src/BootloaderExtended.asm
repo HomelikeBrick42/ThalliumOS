@@ -4,7 +4,6 @@ bits 16
 org ExtendedProgramSpace
 
 call EnableA20
-cli
 lgdt [GDT_Desc]
 mov eax, cr0
 or eax, 1

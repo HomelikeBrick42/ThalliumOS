@@ -118,6 +118,27 @@ SetCursorPos:
 	.end:
 	ret
 
+; al - Character to print
+PrintChar:
+	push eax
+	push ebx
+
+	push ax
+	mov eax, 0
+	call GetCursorIndex
+	lea ebx, [0xb8000+eax*2]
+	pop ax
+
+	mov [ebx], byte al
+
+	call GetCursorPos
+	add ax, 1
+	call SetCursorPos
+
+	pop ebx
+	pop eax
+	ret
+
 ; eax - String to print
 PrintString:
 	push eax
@@ -128,7 +149,10 @@ PrintString:
 	cmp [eax+ecx], byte 0
 	je .end_loop
 		mov bl, [eax+ecx]
-		mov [0xb8000+ecx*2], bl
+		push ax
+		mov al, bl
+		call PrintChar
+		pop ax
 		inc ecx
 	jmp .start_loop
 	.end_loop:

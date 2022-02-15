@@ -1,1 +1,1 @@
-qemu-system-x86_64 bootloader.bin
+qemu-system-x86_64 Bootloader.bin

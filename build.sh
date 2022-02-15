@@ -2,9 +2,13 @@ set -xe
 
 mkdir -p build
 
+BuildDir=`pwd`/build
+
 pushd src
-	nasm -o ../build/Bootloader16.bin Bootloader16.asm -fbin
-	nasm -o ../build/BootloaderExtended.bin BootloaderExtended.asm -fbin
+	pushd bootloader
+		nasm -o $BuildDir/Bootloader16.bin Bootloader16.asm -fbin
+		nasm -o $BuildDir/BootloaderExtended.bin BootloaderExtended.asm -fbin
+	popd
 popd
 
-cat build/Bootloader16.bin build/BootloaderExtended.bin > bootloader.bin
+cat $BuildDir/Bootloader16.bin $BuildDir/BootloaderExtended.bin > Bootloader.bin

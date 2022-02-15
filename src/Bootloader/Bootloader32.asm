@@ -7,4 +7,4 @@ Bootloader32:
 	jmp $
 
 Message:
-	db "Hello, World", 0
+	db "This is a message", 0

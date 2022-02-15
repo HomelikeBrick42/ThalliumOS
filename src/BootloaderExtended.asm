@@ -30,14 +30,17 @@ StartProtectedMode:
 	mov esp, 0x90000
 	mov ebp, ebp
 
-	mov [0xb8000], byte 'H'
-	mov [0xb8002], byte 'e'
-	mov [0xb8004], byte 'l'
-	mov [0xb8006], byte 'l'
-	mov [0xb8008], byte 'o'
+	; Reset screen and cursor
+	call ClearScreen
 
-	jmp $
+	mov ax, 0
+	mov bx, 0
+	call SetCursorPos
+
+	jmp Bootloader32
 
 %include "GDT.asm"
+%include "Bootloader32.asm"
+%include "VGA32.asm"
 
 times (1024*ExtendedProgramSectors) - ($-$$) db 0x00
